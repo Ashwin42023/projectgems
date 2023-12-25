@@ -1,9 +1,9 @@
-import LandingPage from '@/component/landingPage';
+import LoginPage from '@/component/layout2/loginPage';
 import React from 'react'
 
 function Login() {
   return (
-   <LandingPage/>
+   <LoginPage/>
   )
 }
 

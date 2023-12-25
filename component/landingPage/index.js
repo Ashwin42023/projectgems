@@ -1,10 +1,11 @@
 import Head from "next/head";
 import React from "react";
-import HeadPage from "../layout/headPage";
 import HEAD_TITLES from "@/utils/constants/titleConstants";
 import TopSection from "./topSection";
 import CounterSections from "./counterSections";
 import BecomeAnInstructor from "./becomeAnInstructor";
+import HeadPage from "../layout/navbar/headPage";
+import ReviewRating from "./reviewRating";
 
 function LandingPage() {
   return (
@@ -13,6 +14,7 @@ function LandingPage() {
         <TopSection />
         <CounterSections />
         <BecomeAnInstructor />
+        <ReviewRating/>
       </main>
     </HeadPage>
   );
