@@ -1,14 +1,17 @@
-//import '@/styles/globals.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import LayoutPage from "@/component/layout";
-import '@/styles/custom.css'
-import '@/styles/theme.min.css'
+import "@/styles/custom.css";
+import "@/styles/theme.min.css";
 
 export default function App({ Component, pageProps }) {
-  return (
-    <LayoutPage>
-  <Component {...pageProps} />
-  </LayoutPage>
-  
-  )
+  // Use the layout defined at the page level, if available
+  const getLayout = Component.getLayout || ((page) => page);
+
+  // return (
+  //   // <LayoutPage>
+  //   <Component {...pageProps} />
+  //   // </LayoutPage>
+  // );
+
+  return getLayout(<Component {...pageProps} />);
 }

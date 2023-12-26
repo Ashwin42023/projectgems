@@ -1,10 +1,9 @@
-import LoginPage from '@/component/layout2/loginPage';
-import React from 'react'
+import React from 'react';
+import LoginComponent from '@/component/login';
 
 function Login() {
-  return (
-   <LoginPage/>
-  )
-}
+  return <LoginComponent/>;
 
+
+}
 export default Login;
