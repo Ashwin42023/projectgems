@@ -3,7 +3,7 @@ import NavbarPage from '../navbar';
 
 function Header() {
   return (
-    <header class="navbar-light navbar-sticky header-static">
+    <header className="navbar-light navbar-sticky header-static">
     <NavbarPage/>
     </header>
   )

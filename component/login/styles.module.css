@@ -4,7 +4,7 @@
   }
   
   .contactFormHeading {
-    color: #a8344a;
+    color:black;
     z-index: 10;
     position: relative;
     font-family: "Josefin Sans", sans-serif;
@@ -16,10 +16,10 @@
     color: #fff;
     font-family: "Josefin Sans", sans-serif;
   }
-  .inputFormControl {
+  /* .inputFormControl {
     padding: 13px 20px;
     background-color: #ffffff;
-  }
+  } */
   
   .btnContactFormBtn {
     color: #fff;
@@ -39,4 +39,13 @@
     position: absolute;
     top: 0;
     max-width: 150px;
+  }
+  
+  .ashwin:hover{
+    color:red;
+    
+
+  }
+  .ashwin{
+    color:black
   }

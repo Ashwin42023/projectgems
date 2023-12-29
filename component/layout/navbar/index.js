@@ -12,6 +12,7 @@ import {
 import { BsSearch, BsUiRadiosGrid } from "react-icons/bs";
 import Image from "next/image";
 import Link from "next/link";
+import styles from "./style.module.css"
 
 
 function NavbarPage() {
@@ -41,15 +42,15 @@ function NavbarPage() {
 		  <NavDropdown.Item href="#action4">Java</NavDropdown.Item>
 		</NavDropdown>
 
-		<Nav className="me-auto">
+		<Nav className="me-auto" >
 		  {/* <Link href="/login" className="nav-link">
 			About Us
 		  </Link> */}
-		  <Link href="/" className="nav-link">
+		  <Link href="/" className="nav-link"  id= {styles.ashwin}>
 			Home
 		  </Link>
-		  <Nav.Link href="#pricing">User List</Nav.Link>
-		  <Nav.Link href="#pricing">Profile</Nav.Link>
+		  <Nav.Link href="#pricing"  id= {styles.ashwin}>User List</Nav.Link>
+		  <Nav.Link href="#pricing"  id= {styles.ashwin}>Profile</Nav.Link>
 		</Nav>
 
 		<div className="nav my-3 my-xl-0 px-md-4 flex-nowrap align-items-center">
@@ -69,11 +70,11 @@ function NavbarPage() {
 		</div>
 
 		<Nav>
-		  <Link href="/signup" className="nav-link">
-			Signup
+		  <Link href="/signup" className="nav-link" id= {styles.ashwin}>
+			<span>Signup</span>
 		  </Link>
-		  <Link href="/login" className="nav-link">
-			Login
+		  <Link href="/login" className="nav-link" id = {styles.ashwin}>
+			<span>Login</span>
 		  </Link>
 		</Nav>
 	  </NavbarCollapse>

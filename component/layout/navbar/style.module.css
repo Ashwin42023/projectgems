@@ -1,0 +1,21 @@
+#ashwin{
+    position: relative;
+}
+#ashwin::after{
+content:"";
+position: absolute;
+bottom: 2px;
+height: 3px;
+width: 100%;
+left: 0;
+background-color:grey;
+transition: 0.3s;
+transition-timing-function: ease-in-out;
+transform: scaleX(0);
+}
+#ashwin:hover::after{
+    transform: scaleX(1);
+}
+#ashwin:hover{
+    color: red;
+}
