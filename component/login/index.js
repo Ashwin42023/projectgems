@@ -16,33 +16,76 @@ const defaultValues = {
   password: "",
 };
 
+// function LoginComponent() {
+//   const [issubmitting, setIsSubmitting] = React.useState(false);
+//   const handleFormSubmit = async (values,{setSubmitting}) => {
+//     await axios
+//       .post("https://reqres.in/api/login", {
+//         email: values.email,
+//         password: values.password,
+      
+//       })
+//       .then(function (response) {
+//         localStorage.setItem("userAuthToken", response.data.token);
+//         window.location = "/home";
+//         setIsSubmitting(true);
+        
+//       })
+//       .catch(function (error) {
+//         if (error?.response?.status == 400) {
+//           alert(error.response?.data?.error);
+//         } else {
+//           alert(error.message);
+//         }
+//       });
+     
+//   };
+//   const validationSchema = yup.object().shape({
+//     email: yup.string().required().email(),
+//     password: yup.string().required().min(6).max(20),
+//     // terms: yup.bool().required().oneOf([true], "Terms must be accepted"),
+//   });
 function LoginComponent() {
-  const handleFormSubmit = (values) => {
-    axios
-      .post("https://reqres.in/api/login", {
+  const [issubmitting, setIsSubmitting] = React.useState(false);
+
+  const handleFormSubmit = async (values, { setSubmitting }) => {
+    try {
+      setIsSubmitting(true);
+
+      // Simulate an asynchronous API call
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 2000); // Simulate a 2-second delay
+      });
+
+      // Actual API call
+      const response = await axios.post("https://reqres.in/api/login", {
         email: values.email,
         password: values.password,
-      })
-      .then(function (response) {
-        localStorage.setItem("userAuthToken", response.data.token);
-        window.location = "/home";
-      })
-      .catch(function (error) {
-        if (error?.response?.status == 400) {
-          alert(error.response?.data?.error);
-        } else {
-          alert(error.message);
-        }
       });
+
+      localStorage.setItem("userAuthToken", response.data.token);
+      window.location = "/home";
+    } catch (error) {
+      if (error?.response?.status === 400) {
+        alert(error.response?.data?.error);
+      } else {
+        alert(error.message);
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
   const validationSchema = yup.object().shape({
     email: yup.string().required().email(),
     password: yup.string().required().min(6).max(20),
-    // terms: yup.bool().required().oneOf([true], "Terms must be accepted"),
   });
 
+ 
 
-  return (
+    return (
     <>
          <section>
           <div className="container my-3 pt-5">
@@ -56,7 +99,7 @@ function LoginComponent() {
                   onSubmit={handleFormSubmit}
                   initialValues={defaultValues}
                 >
-                  {({ handleSubmit }) => {
+                  {({ handleSubmit , isSubmitting }) => {
                     return (
                       <Form noValidate onSubmit={handleSubmit}>
                         <div
@@ -98,9 +141,10 @@ function LoginComponent() {
                       <div className="col-12 mx-auto my-2 mt-4">
                         <Button
                           type="submit"
+                          disabled={issubmitting}
                           className="btn w-100 bg-primary bg-opacity-50 py-3 text-white me-2 mb-4 mb-sm-0"
                         >
-                          Login &gt;&gt;
+                         {issubmitting ? 'please wait...' : 'login'}
                         </Button>
                       </div>
 
