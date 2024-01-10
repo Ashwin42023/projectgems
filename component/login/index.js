@@ -1,14 +1,15 @@
 import React from "react";
 import styles from "./styles.module.css";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form ,Spinner} from "react-bootstrap";
 import Link from "next/link";
 import {FaArrowLeft , FaArrowRight} from "react-icons/fa"
 import { Field, Formik } from "formik";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 import * as yup from "yup";
 import InputField from "../fields/inputfield";
-
+import { LoginService } from "../services/authService";
 
 
 const defaultValues = {
@@ -16,65 +17,21 @@ const defaultValues = {
   password: "",
 };
 
-// function LoginComponent() {
-//   const [issubmitting, setIsSubmitting] = React.useState(false);
-//   const handleFormSubmit = async (values,{setSubmitting}) => {
-//     await axios
-//       .post("https://reqres.in/api/login", {
-//         email: values.email,
-//         password: values.password,
-      
-//       })
-//       .then(function (response) {
-//         localStorage.setItem("userAuthToken", response.data.token);
-//         window.location = "/home";
-//         setIsSubmitting(true);
-        
-//       })
-//       .catch(function (error) {
-//         if (error?.response?.status == 400) {
-//           alert(error.response?.data?.error);
-//         } else {
-//           alert(error.message);
-//         }
-//       });
-     
-//   };
-//   const validationSchema = yup.object().shape({
-//     email: yup.string().required().email(),
-//     password: yup.string().required().min(6).max(20),
-//     // terms: yup.bool().required().oneOf([true], "Terms must be accepted"),
-//   });
+
 function LoginComponent() {
-  const [issubmitting, setIsSubmitting] = React.useState(false);
+  const router = useRouter();
 
-  const handleFormSubmit = async (values, { setSubmitting }) => {
-    try {
-      setIsSubmitting(true);
+  const handleFormSubmit = async (values) => {
+    const res = await LoginService({
+      password: values.password,
+      email: values.email,
+    });
 
-      // Simulate an asynchronous API call
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve();
-        }, 2000); // Simulate a 2-second delay
-      });
-
-      // Actual API call
-      const response = await axios.post("https://reqres.in/api/login", {
-        email: values.email,
-        password: values.password,
-      });
-
-      localStorage.setItem("userAuthToken", response.data.token);
-      window.location = "/home";
-    } catch (error) {
-      if (error?.response?.status === 400) {
-        alert(error.response?.data?.error);
-      } else {
-        alert(error.message);
-      }
-    } finally {
-      setIsSubmitting(false);
+    if (res.success) {
+      // window.location = "/users";
+      router.replace("/users");
+    } else {
+      alert(res.message);
     }
   };
 
@@ -139,13 +96,25 @@ function LoginComponent() {
 
 
                       <div className="col-12 mx-auto my-2 mt-4">
-                        <Button
-                          type="submit"
-                          disabled={issubmitting}
-                          className="btn w-100 bg-primary bg-opacity-50 py-3 text-white me-2 mb-4 mb-sm-0"
-                        >
-                         {issubmitting ? 'please wait...' : 'login'}
-                        </Button>
+                      <Button
+                                disabled={isSubmitting}
+                                type="submit"
+                                // variant={isSubmitting ? "secondary" : "primary"}
+                                className={`btn w-100 ${
+                                  isSubmitting ? "bg-secondary" : "bg-primary"
+                                } bg-opacity-50 py-3 text-white me-2 mb-4 mb-sm-0`}
+                              >
+                                {/* {isSubmitting ? "Submitting..." : "Login >>"} */}
+                                {isSubmitting ? (
+                                  <Spinner animation="border" role="status">
+                                    <span className="visually-hidden">
+                                      Loading...
+                                    </span>
+                                  </Spinner>
+                                ) : (
+                                  "Login"
+                                )}
+                              </Button>
                       </div>
 
                       <div className="col-12 mt-4 d-flex justify-content-between">

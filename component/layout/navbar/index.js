@@ -49,7 +49,7 @@ function NavbarPage() {
 		  <Link href="/" className="nav-link"  id= {styles.ashwin}>
 			Home
 		  </Link>
-		  <Nav.Link href="#pricing"  id= {styles.ashwin}>User List</Nav.Link>
+		  <Nav.Link href="/users" id= {styles.ashwin}>User List</Nav.Link>
 		  <Nav.Link href="#pricing"  id= {styles.ashwin}>Profile</Nav.Link>
 		</Nav>
 
